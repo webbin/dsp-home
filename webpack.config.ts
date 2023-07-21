@@ -64,12 +64,58 @@ const config: webpack.Configuration = {
         use: [stylesHandler, 'css-loader', 'postcss-loader'],
       },
       {
+        test: /\.s[ac]ss$/,
+        use:[stylesHandler, 'css-loader', 'postcss-loader', 'sass-loader']
+      },
+      {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
         type: 'asset',
       },
-
+      {
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/, /\.webp$/],
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              esModule: false,
+              outputPath: 'imgs/',
+            },
+          },
+        ],
+      },
+      {
+        test: [/\.ico$/],
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 1024,
+              name: '[name].ico',
+            },
+          },
+        ],
+      },
       // Add your rules for custom modules here
       // Learn more about loaders from https://webpack.js.org/loaders/
+      {
+        test: /\.txt$/,
+        use: [
+          {
+            loader: 'raw-loader',
+            options: {
+              esModule: false,
+            },
+          },
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/',
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {

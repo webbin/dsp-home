@@ -16,7 +16,8 @@
     "types": ["node"],
     "allowJs": true
   },
-  "include": ["src"],  
+  "include": ["src/*", "src/**/*.txt"],
+  "exclude": ["node_modules", "build", "dist"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"
